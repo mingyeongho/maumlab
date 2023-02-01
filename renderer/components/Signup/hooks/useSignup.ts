@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { InputProps } from "../../Common/Input";
 
-const useLogin = () => {
+const useSignup = () => {
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -14,6 +14,7 @@ const useLogin = () => {
 
   const onLogin = (e: FormEvent) => {
     e.preventDefault();
+    console.log(inputs);
   };
 
   const emailInputProps: InputProps = {
@@ -37,10 +38,10 @@ const useLogin = () => {
   };
 
   const loginButtonProps = {
-    children: "로그인",
+    children: "회원가입",
   };
 
   return { emailInputProps, passwordInputProps, loginButtonProps, onLogin };
 };
 
-export default useLogin;
+export default useSignup;

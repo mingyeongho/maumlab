@@ -1,11 +1,11 @@
 import Link from "next/link";
 import React from "react";
 import Input from "../Common/Input";
-import useLogin from "./hooks/useLogin";
+import useSignup from "./hooks/useSignup";
 
-const Login = () => {
+const Signup = () => {
   const { emailInputProps, passwordInputProps, loginButtonProps, onLogin } =
-    useLogin();
+    useSignup();
   return (
     <>
       <main>
@@ -15,9 +15,9 @@ const Login = () => {
           <button {...loginButtonProps} />
         </form>
         <div className="signup_wrapper">
-          <span>계정이 없으신가요? </span>
-          <Link href={"/signup"}>
-            <a>회원가입 하러가기</a>
+          <span>계정이 있으신가요? </span>
+          <Link href={"/auth"}>
+            <a>로그인 하러가기</a>
           </Link>
         </div>
       </main>
@@ -63,4 +63,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
