@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import React from "react";
 import HeadInfo from "../components/HeadInfo/HeadInfo";
 import Navbar from "../components/Navbar/Navbar";
@@ -14,7 +13,7 @@ const App = ({ Component, pageProps }) => {
       <div className="App">
         <HeadInfo />
         <Navbar />
-        {isAuth ? <Component {...pageProps} /> : <Auth />}
+        <Component {...pageProps} />
       </div>
       <style jsx>{`
         .App {

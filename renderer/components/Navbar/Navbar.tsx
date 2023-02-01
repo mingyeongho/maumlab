@@ -19,8 +19,8 @@ const Navbar = () => {
       <style jsx>{`
         nav {
           height: 100%;
-          width: 50px;
-          background-color: #362b26;
+          width: 60px;
+          background-color: #404040;
           display: flex;
           flex-direction: column;
           align-items: center;

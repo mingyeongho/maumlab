@@ -1,5 +1,7 @@
+import Login from "../components/Login/Login";
+
 const Auth = () => {
-  return <div>Auth</div>;
+  return <Login />;
 };
 
 export default Auth;
