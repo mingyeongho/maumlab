@@ -14,8 +14,9 @@ if (isProd) {
   await app.whenReady();
 
   const mainWindow = createWindow("main", {
-    width: 1000,
-    height: 600,
+    width: 400,
+    height: 650,
+    autoHideMenuBar: true,
   });
 
   if (isProd) {
@@ -23,7 +24,6 @@ if (isProd) {
   } else {
     const port = process.argv[2];
     await mainWindow.loadURL(`http://localhost:${port}/home`);
-    // mainWindow.webContents.openDevTools();
   }
 })();
 
