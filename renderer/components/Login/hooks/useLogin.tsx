@@ -1,5 +1,5 @@
 import {
-  browserSessionPersistence,
+  browserLocalPersistence,
   setPersistence,
   signInWithEmailAndPassword,
 } from "firebase/auth";
@@ -28,10 +28,14 @@ const useLogin = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const { user } = await login({ email, password });
-      if (user) {
-        router.push("/home");
-      }
+      await setPersistence(firebaseAuth, browserLocalPersistence)
+        .then(() => signInWithEmailAndPassword(firebaseAuth, email, password))
+        .then((user) => {
+          if (user) {
+            console.log(user);
+            router.push("/home");
+          }
+        });
     } catch (e) {
       if (e.code === "auth/user-not-found") {
         console.error("존재하지 않은 계정입니다.");

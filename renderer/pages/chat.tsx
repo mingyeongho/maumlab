@@ -1,12 +1,7 @@
-import React from "react";
-import useIsAuth from "../hooks/useIsAuth";
-import Auth from "./auth";
+import withAuth from "../components/Hoc/withAuth";
 
 const Chat = () => {
-  const { isLoggedIn } = useIsAuth();
-  if (!isLoggedIn) return <Auth />;
-
-  return <div>Chat</div>;
+  return <main>Chat</main>;
 };
 
-export default Chat;
+export default withAuth(Chat);

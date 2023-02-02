@@ -1,11 +1,12 @@
-import useIsAuth from "../hooks/useIsAuth";
-import Auth from "./auth";
+import withAuth from "../components/Hoc/withAuth";
+import Home from "../components/Home/Home";
 
 function Index() {
-  const { isLoggedIn } = useIsAuth();
-  if (!isLoggedIn) return <Auth />;
-
-  return <div>Index</div>;
+  return (
+    <main>
+      <Home />
+    </main>
+  );
 }
 
-export default Index;
+export default withAuth(Index);

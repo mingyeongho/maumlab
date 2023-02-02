@@ -51,4 +51,6 @@
 
 <h2 id='agonize'>고민한 부분</h2>
 
+- Firebase Authentication의 setPersistence
+
 <h2 id='improve'>개선사항</h2>

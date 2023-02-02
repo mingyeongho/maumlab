@@ -1,7 +1,7 @@
-import React from "react";
+import { onAuthStateChanged, User } from "firebase/auth";
+import React, { useEffect, useState } from "react";
 import HeadInfo from "../components/HeadInfo/HeadInfo";
 import Navbar from "../components/Navbar/Navbar";
-import useIsAuth from "../hooks/useIsAuth";
 import "../styles/Global.css";
 
 const App = ({ Component, pageProps }) => {

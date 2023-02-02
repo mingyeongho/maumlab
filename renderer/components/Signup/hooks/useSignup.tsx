@@ -1,6 +1,8 @@
+import { doc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { ChangeEvent, FormEvent, useState } from "react";
 import createUser from "../../../apis/Auth/createUser";
+import { firestore } from "../../../firebase/firebase";
 import {
   isValidSignup,
   isValidEmail,
@@ -34,8 +36,16 @@ const useSignup = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const res = await createUser({ email, password });
-      if (res.user) router.push("/auth");
+      const { user } = await createUser({ email, password });
+      if (user) {
+        const { uid, email } = user;
+        await setDoc(doc(firestore, "User", uid), {
+          uid,
+          email,
+          nickname,
+        });
+        router.push("/auth");
+      }
     } catch ({ code, message }) {
       if (code === "auth/email-already-in-use") {
         console.error("이미 존재하는 계정입니다.");
