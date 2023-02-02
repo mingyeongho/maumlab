@@ -12,8 +12,8 @@ interface LoginProps {
 }
 
 const login = async ({ email, password }: LoginProps) => {
-  return await setPersistence(firebaseAuth, browserLocalPersistence).then(() =>
-    signInWithEmailAndPassword(firebaseAuth, email, password)
+  return await setPersistence(firebaseAuth, browserLocalPersistence).then(
+    async () => await signInWithEmailAndPassword(firebaseAuth, email, password)
   );
 };
 
