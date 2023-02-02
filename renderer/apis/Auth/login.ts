@@ -1,9 +1,4 @@
-import {
-  browserLocalPersistence,
-  browserSessionPersistence,
-  setPersistence,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { firebaseAuth } from "../../firebase/firebase";
 
 interface LoginProps {
@@ -12,9 +7,7 @@ interface LoginProps {
 }
 
 const login = async ({ email, password }: LoginProps) => {
-  return await setPersistence(firebaseAuth, browserLocalPersistence).then(
-    async () => await signInWithEmailAndPassword(firebaseAuth, email, password)
-  );
+  return await signInWithEmailAndPassword(firebaseAuth, email, password);
 };
 
 export default login;

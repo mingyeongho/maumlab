@@ -1,12 +1,13 @@
-import { signOut } from "firebase/auth";
-import { useRef, useState } from "react";
-import { firebaseAuth } from "../../../firebase/firebase";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 const useLogout = () => {
+  const router = useRouter();
   const [checked, setChecked] = useState(false);
 
   const onLogout = () => {
-    signOut(firebaseAuth);
+    sessionStorage.removeItem("user");
+    router.push("/auth");
   };
 
   const onChange = () => {

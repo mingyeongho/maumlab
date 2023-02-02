@@ -13,7 +13,8 @@
   "dependencies": {
     "electron-serve": "^1.1.0",
     "electron-store": "^8.1.0",
-    "firebase": "^9.16.0"
+    "firebase": "^9.16.0",
+    "recoil": "^0.7.6"
   },
   "devDependencies": {
     "@svgr/webpack": "^6.5.1",
