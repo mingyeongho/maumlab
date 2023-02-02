@@ -1,5 +1,6 @@
+import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/router";
-import { ComponentType } from "react";
+import { ComponentType, useEffect } from "react";
 import { firebaseAuth } from "../../firebase/firebase";
 
 const withAuth = (Component: ComponentType) => {
@@ -7,6 +8,16 @@ const withAuth = (Component: ComponentType) => {
     // checks whether we are on client / browser or server.
     if (typeof window !== "undefined") {
       const Router = useRouter();
+
+      useEffect(() => {
+        onAuthStateChanged(firebaseAuth, (user) => {
+          if (user) {
+            console.log("sign in");
+          } else {
+            console.log("sign out");
+          }
+        });
+      }, []);
 
       const isLoggedIn = firebaseAuth.currentUser;
 
