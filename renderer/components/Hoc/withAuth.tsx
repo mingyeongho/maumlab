@@ -6,7 +6,8 @@ const withAuth = (Component: ComponentType) => {
     const router = useRouter();
 
     useEffect(() => {
-      if (!sessionStorage.getItem("user")) {
+      const savedValue = sessionStorage.getItem("user");
+      if (!savedValue) {
         router.push("/auth");
       }
     }, []);

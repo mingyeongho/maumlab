@@ -1,18 +1,18 @@
-import Profile from "./Profile/Profile";
+import MyProfile from "./MyProfile/MyProfile";
 import UserList from "./UserList/UserList";
 
 const Home = () => {
   return (
     <>
       <div className="home">
-        <Profile />
+        <MyProfile />
         <UserList />
       </div>
       <style jsx>{`
         .home {
           display: flex;
           flex-direction: column;
-          gap: 4px;
+          gap: 20px;
         }
       `}</style>
     </>

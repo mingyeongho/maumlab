@@ -24,6 +24,7 @@ const useLogin = () => {
     try {
       const { user } = await login({ email, password });
       if (user) {
+        console.log(user);
         const { uid } = user;
         sessionStorage.setItem("user", uid);
         router.push("/home");
