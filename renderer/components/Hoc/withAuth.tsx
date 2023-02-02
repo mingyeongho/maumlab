@@ -8,8 +8,7 @@ const withAuth = (Component: ComponentType) => {
     if (typeof window !== "undefined") {
       const Router = useRouter();
 
-      //   const accessToken = localStorage.getItem("accessToken");
-      const isLoggedIn = firebaseAuth.currentUser ? true : false;
+      const isLoggedIn = firebaseAuth.currentUser;
 
       // If there is no access token we redirect to "/" page.
       if (!isLoggedIn) {
