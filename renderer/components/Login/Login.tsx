@@ -51,12 +51,26 @@ const Login = () => {
           cursor: pointer;
         }
 
+        button:hover {
+          background-color: #ff6f00;
+          cursor: pointer;
+        }
+
+        button:disabled {
+          background-color: #bdbdbd;
+          cursor: no-drop;
+        }
+
         .signup_wrapper {
           font-size: 0.8rem;
         }
 
         a {
           color: #f57f17;
+        }
+
+        a:hover {
+          color: #ff6f00;
         }
       `}</style>
     </>

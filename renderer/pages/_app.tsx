@@ -3,11 +3,8 @@ import HeadInfo from "../components/HeadInfo/HeadInfo";
 import Navbar from "../components/Navbar/Navbar";
 import useIsAuth from "../hooks/useIsAuth";
 import "../styles/Global.css";
-import Auth from "./auth";
 
 const App = ({ Component, pageProps }) => {
-  const { isAuth } = useIsAuth();
-
   return (
     <>
       <div className="App">
