@@ -1,3 +1,4 @@
+import React, { SetStateAction } from "react";
 import { UserDTO } from "./type";
 
 export interface ProfileProps {
@@ -10,4 +11,9 @@ export interface MyProfileProps {
 
 export interface UserListProps {
   users: UserDTO[];
+}
+
+export interface ModalProps {
+  children: JSX.Element;
+  setIsModal: React.Dispatch<SetStateAction<boolean>>;
 }

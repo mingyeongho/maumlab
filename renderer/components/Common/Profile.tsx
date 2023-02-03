@@ -1,11 +1,22 @@
+import { useState } from "react";
 import { ProfileProps } from "../utils/interface";
 import Loader from "./Loader";
+import Modal from "./Modal";
+import Portal from "./Portal";
 
 const Profile = ({ user }: ProfileProps) => {
   const { nickname } = user;
+  const [isModal, setIsModal] = useState(false);
+
+  const onClick = () => {
+    const portal = document.getElementById("portal");
+    portal.style.display = "flex";
+    setIsModal(true);
+  };
+
   return (
     <>
-      <div className="profile">
+      <div className="profile" onClick={onClick}>
         {user ? (
           <>
             <div className="thumbnail"></div>
@@ -15,6 +26,13 @@ const Profile = ({ user }: ProfileProps) => {
           <Loader />
         )}
       </div>
+      {isModal && (
+        <Portal>
+          <Modal setIsModal={setIsModal}>
+            <div>{nickname}</div>
+          </Modal>
+        </Portal>
+      )}
       <style jsx>{`
         .profile {
           display: flex;

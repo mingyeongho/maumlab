@@ -9,7 +9,6 @@ const App = ({ Component, pageProps }) => {
         <HeadInfo />
         <Navbar />
         <Component {...pageProps} />
-        <div id="portal"></div>
       </div>
       <style jsx>{`
         .App {
