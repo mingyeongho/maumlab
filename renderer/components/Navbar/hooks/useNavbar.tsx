@@ -1,4 +1,5 @@
 import UserSvg from "../../../assets/images/user.svg";
+import MessageSvg from "../../../assets/images/message.svg";
 import MessengerSvg from "../../../assets/images/messenger.svg";
 import SettingSvg from "../../../assets/images/setting.svg";
 import { useRouter } from "next/router";
@@ -16,9 +17,19 @@ const useNavbar = () => {
       text: "Chat",
       href: "/chat",
       icon: (
-        <MessengerSvg
+        <MessageSvg
           stroke={pathname === "/chat" ? "#a0a0a0" : "#5f5f5f"}
           fill={pathname === "/chat" ? "#a0a0a0" : "#5f5f5f"}
+        />
+      ),
+    },
+    {
+      text: "Group",
+      href: "/group",
+      icon: (
+        <MessengerSvg
+          stroke={pathname === "/group" ? "#a0a0a0" : "#5f5f5f"}
+          fill={pathname === "/group" ? "#a0a0a0" : "#5f5f5f"}
         />
       ),
     },

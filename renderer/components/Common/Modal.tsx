@@ -1,10 +1,9 @@
 import { ModalProps } from "../utils/interface";
 
-const Modal = ({ children, setIsModal }: ModalProps) => {
-  const onClick = () => {
-    const portal = document.getElementById("portal");
-    portal.style.display = "none";
-    setIsModal(false);
+const Modal = ({ children, setIsShow }: ModalProps) => {
+  const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    setIsShow((prev) => !prev);
   };
 
   return (

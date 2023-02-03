@@ -5,9 +5,13 @@ export type UserDTO = {
 };
 
 export type RoomDTO = {
-  roomId: string;
-  users: string[]; // room에 속해있는 uid 리스트
-  messages: MessageDTO[];
+  uid: RoomItemDTO;
+};
+
+export type RoomItemDTO = {
+  lastMessage: string;
+  recentTimestamp: string;
+  user: UserDTO;
 };
 
 export type MessageDTO = {

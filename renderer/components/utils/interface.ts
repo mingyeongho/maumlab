@@ -15,9 +15,13 @@ export interface UserListProps {
 
 export interface ModalProps {
   children: JSX.Element;
-  setIsModal: React.Dispatch<SetStateAction<boolean>>;
+  setIsShow: React.Dispatch<SetStateAction<boolean>>;
 }
 
 export interface UserDetailProps {
+  user: UserDTO;
+}
+
+export interface UserItemProps {
   user: UserDTO;
 }

@@ -4,7 +4,7 @@ import { firestore } from "./firebase";
 interface SetDocumentProps {
   collection: string;
   id?: string;
-  payload: any;
+  payload?: any;
 }
 
 const setDocument = async ({ collection, id, payload }: SetDocumentProps) => {
