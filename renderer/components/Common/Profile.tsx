@@ -1,38 +1,47 @@
-import React from "react";
-import { User } from "../utils/type";
-
-interface ProfileProps {
-  user: User;
-}
+import { ProfileProps } from "../utils/interface";
+import Loader from "./Loader";
 
 const Profile = ({ user }: ProfileProps) => {
-  const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-
+  const { nickname } = user;
   return (
     <>
       <div className="profile">
-        <div className="thumbnail"></div>
-        <div className="nickname">{user ? user.nickname : "Loading..."}</div>
+        {user ? (
+          <>
+            <div className="thumbnail"></div>
+            <div className="nickname">{nickname}</div>
+          </>
+        ) : (
+          <Loader />
+        )}
       </div>
       <style jsx>{`
         .profile {
           display: flex;
           align-items: center;
-          gap: 8px;
-          padding: 8px;
+          gap: 12px;
+          padding: 6px 8px;
           border-radius: 10px;
         }
 
-        .thumbnail {
-          width: 44px;
-          height: 44px;
-          border-radius: 50%;
-          background-color: ${randomColor};
+        .profile:hover {
+          background-color: #444343;
+          cursor: pointer;
         }
 
-        .profile:hover {
-          background-color: #353535;
-          cursor: pointer;
+        .thumbnail {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background-color: #555;
+          box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+            rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+            rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        }
+
+        .nickname {
+          font-size: 1.1rem;
+          font-weight: bolder;
         }
       `}</style>
     </>

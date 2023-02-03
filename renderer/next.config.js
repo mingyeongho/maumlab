@@ -6,6 +6,8 @@ module.exports = {
     NEXT_PUBLIC_STORAGEBUCKET: "maumlab-347c4.appspot.com",
     NEXT_PUBLIC_MESSAGINGSENDERID: "604894212044",
     NEXT_PUBLIC_APPID: "1:604894212044:web:66524178a9a69b8c417769",
+    NEXT_PUBLIC_DATABASEURL:
+      "https://maumlab-347c4-default-rtdb.asia-southeast1.firebasedatabase.app",
   },
   webpack: (config, { isServer }) => {
     if (!isServer) {

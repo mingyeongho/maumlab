@@ -39,10 +39,11 @@ const useSignup = () => {
       const { user } = await createUser({ email, password });
       if (user) {
         const { uid, email } = user;
-        await setDoc(doc(firestore, "User", uid), {
+        await setDoc(doc(firestore, "Users", uid), {
           uid,
           email,
           nickname,
+          roomId: [],
         });
         router.push("/auth");
       }
