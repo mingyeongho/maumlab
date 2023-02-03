@@ -1,8 +1,7 @@
-import { doc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { ChangeEvent, FormEvent, useState } from "react";
 import createUser from "../../../apis/Auth/createUser";
-import { firestore } from "../../../firebase/firebase";
+import setDocument from "../../../firebase/setDocument";
 import {
   isValidSignup,
   isValidEmail,
@@ -39,12 +38,12 @@ const useSignup = () => {
       const { user } = await createUser({ email, password });
       if (user) {
         const { uid, email } = user;
-        await setDoc(doc(firestore, "Users", uid), {
+        const payload = {
           uid,
           email,
           nickname,
-          roomId: [],
-        });
+        };
+        await setDocument({ collection: "User", id: uid, payload });
         router.push("/auth");
       }
     } catch ({ code, message }) {

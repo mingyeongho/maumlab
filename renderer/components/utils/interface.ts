@@ -17,3 +17,7 @@ export interface ModalProps {
   children: JSX.Element;
   setIsModal: React.Dispatch<SetStateAction<boolean>>;
 }
+
+export interface UserDetailProps {
+  user: UserDTO;
+}
