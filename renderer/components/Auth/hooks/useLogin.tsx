@@ -1,17 +1,9 @@
-import {
-  setPersistence,
-  browserSessionPersistence,
-  signInWithEmailAndPassword,
-  browserLocalPersistence,
-} from "firebase/auth";
 import { useRouter } from "next/router";
 import { ChangeEvent, FormEvent, useState } from "react";
 import login from "../../../apis/Auth/login";
-import { firebaseAuth } from "../../../firebase/firebase";
 import { isValidLogin } from "../../../function/isValid";
 import { InputProps } from "../../Common/Input";
 import Loader from "../../Common/Loader";
-import error from "../../utils/error";
 
 const useLogin = () => {
   const router = useRouter();

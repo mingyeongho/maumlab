@@ -1,13 +1,14 @@
 import withAuth from "../components/Hoc/withAuth";
 import Home from "../components/Home/Home";
+import Navbar from "../components/Navbar/Navbar";
 
-function Index() {
+const home = () => {
   return (
-    <main>
+    <>
+      <Navbar />
       <Home />
-    </main>
+    </>
   );
-}
+};
 
-// export default withAuth(Index);
-export default Index;
+export default withAuth(home);

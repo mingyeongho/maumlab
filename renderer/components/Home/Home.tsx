@@ -1,26 +1,19 @@
 import Friends from "./Friends/Friends";
-import My from "./My/My";
+import MyProfile from "./MyProfile/MyProfile";
 
 const Home = () => {
   return (
     <>
-      <div className="home">
-        <div className="title">
-          <h4>친구</h4>
-        </div>
-        <My />
+      <main>
+        <MyProfile />
         <div className="separate"></div>
         <Friends />
-      </div>
+      </main>
       <style jsx>{`
-        .home {
+        main {
           display: flex;
           flex-direction: column;
-          gap: 14px;
-        }
-
-        .title {
-          padding: 0 6px;
+          gap: 10px;
         }
 
         .separate {

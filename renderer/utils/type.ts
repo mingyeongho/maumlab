@@ -1,17 +1,13 @@
 export type UserDTO = {
   email: string;
-  nickname: string;
+  displayName: string;
   uid: string;
 };
 
-export type RoomDTO = {
-  uid: RoomItemDTO;
-};
-
-export type RoomItemDTO = {
+export type ChatItemDTO = {
   lastMessage: string;
-  recentTimestamp: string;
-  user: UserDTO;
+  lastTimeStamp: number;
+  users: string[];
 };
 
 export type MessageDTO = {

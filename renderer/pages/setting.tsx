@@ -1,23 +1,14 @@
-import React from "react";
 import withAuth from "../components/Hoc/withAuth";
-import Logout from "../components/Logout/Logout";
+import Logout from "../components/Home/Logout/Logout";
+import Navbar from "../components/Navbar/Navbar";
 
 const Setting = () => {
   return (
-    <>
-      <main>
-        <Logout />
-      </main>
-      <style jsx>{`
-        main {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-      `}</style>
-    </>
+    <main>
+      <Navbar />
+      <Logout />
+    </main>
   );
 };
 
-// export default withAuth(Setting);
-export default Setting;
+export default withAuth(Setting);

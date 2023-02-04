@@ -1,5 +1,5 @@
 import React, { SetStateAction } from "react";
-import { UserDTO } from "./type";
+import { ChatItemDTO, UserDTO } from "./type";
 
 export interface ModalProps {
   children: JSX.Element;
@@ -8,4 +8,8 @@ export interface ModalProps {
 
 export interface FriendProps {
   user: UserDTO;
+}
+
+export interface ChatItemProps {
+  chatItem: ChatItemDTO;
 }

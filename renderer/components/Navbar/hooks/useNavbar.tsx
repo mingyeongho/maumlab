@@ -18,8 +18,8 @@ const useNavbar = () => {
       href: "/chat",
       icon: (
         <MessageSvg
-          stroke={pathname === "/chat" ? "#a0a0a0" : "#5f5f5f"}
-          fill={pathname === "/chat" ? "#a0a0a0" : "#5f5f5f"}
+          stroke={pathname.includes("chat") ? "#a0a0a0" : "#5f5f5f"}
+          fill={pathname.includes("chat") ? "#a0a0a0" : "#5f5f5f"}
         />
       ),
     },
@@ -28,8 +28,8 @@ const useNavbar = () => {
       href: "/group",
       icon: (
         <MessengerSvg
-          stroke={pathname === "/group" ? "#a0a0a0" : "#5f5f5f"}
-          fill={pathname === "/group" ? "#a0a0a0" : "#5f5f5f"}
+          stroke={pathname.includes("group") ? "#a0a0a0" : "#5f5f5f"}
+          fill={pathname.includes("group") ? "#a0a0a0" : "#5f5f5f"}
         />
       ),
     },

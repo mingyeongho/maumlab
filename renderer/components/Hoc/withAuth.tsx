@@ -1,23 +1,13 @@
-import { onAuthStateChanged } from "firebase/auth";
-import { useRouter } from "next/router";
-import { ComponentType, useEffect } from "react";
+import { ComponentType } from "react";
 import { firebaseAuth } from "../../firebase/firebase";
 import Auth from "../../pages/auth";
 
 const withAuth = (Component: ComponentType) => (props) => {
-  const router = useRouter();
+  const currentUser = firebaseAuth.currentUser;
 
-  useEffect(() => {
-    onAuthStateChanged(firebaseAuth, (user) => {
-      if (user) {
-        console.log("logged in");
-      } else {
-        console.log("logged out");
-        router.push("/auth");
-        return <></>;
-      }
-    });
-  }, []);
+  if (!currentUser) {
+    return <Auth />;
+  }
 
   return <Component {...props} />;
 };
