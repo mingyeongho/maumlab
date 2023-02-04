@@ -16,23 +16,12 @@ const useRoomForm = () => {
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     console.log(input);
+
     try {
       // 이미 존재하는 채팅방일 경우
       await updateDocument({
         collectionName: "Rooms",
         documentName: currentUser?.uid,
-        updateFields: {
-          [uid as string]: {
-            lastTimeStamp: Date.now(),
-            lastMessage: input,
-            users: [uid, currentUser?.uid],
-          },
-        },
-      });
-      // 이미 존재하는 채팅방일 경우
-      await updateDocument({
-        collectionName: "Rooms",
-        documentName: uid as string,
         updateFields: {
           [uid as string]: {
             lastTimeStamp: Date.now(),
@@ -54,6 +43,22 @@ const useRoomForm = () => {
           },
         },
       });
+    }
+
+    try {
+      // 이미 존재하는 채팅방일 경우
+      await updateDocument({
+        collectionName: "Rooms",
+        documentName: uid as string,
+        updateFields: {
+          [uid as string]: {
+            lastTimeStamp: Date.now(),
+            lastMessage: input,
+            users: [uid, currentUser?.uid],
+          },
+        },
+      });
+    } catch (e) {
       await setDocument({
         collectionName: "Rooms",
         documentName: uid as string,
