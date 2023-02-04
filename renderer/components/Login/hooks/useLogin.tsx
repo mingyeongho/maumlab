@@ -1,9 +1,17 @@
+import {
+  setPersistence,
+  browserSessionPersistence,
+  signInWithEmailAndPassword,
+  browserLocalPersistence,
+} from "firebase/auth";
 import { useRouter } from "next/router";
 import { ChangeEvent, FormEvent, useState } from "react";
 import login from "../../../apis/Auth/login";
+import { firebaseAuth } from "../../../firebase/firebase";
 import { isValidLogin } from "../../../function/isValid";
 import { InputProps } from "../../Common/Input";
 import Loader from "../../Common/Loader";
+import error from "../../utils/error";
 
 const useLogin = () => {
   const router = useRouter();
@@ -21,20 +29,8 @@ const useLogin = () => {
   const onLogin = async (e: FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    try {
-      const { user } = await login({ email, password });
-      if (user) {
-        const { uid } = user;
-        sessionStorage.setItem("user", uid);
-        router.push("/home");
-      }
-    } catch (e) {
-      if (e.code === "auth/user-not-found") {
-        console.error("존재하지 않은 계정입니다.");
-      } else if (e.code === "auth/wrong-password") {
-        console.error("비밀번호가 틀립니다.");
-      } else console.error(e);
-    }
+    await login({ email, password });
+    router.push("/home");
     setIsLoading(false);
   };
 

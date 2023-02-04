@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { ChangeEvent, FormEvent, useState } from "react";
 import createUser from "../../../apis/Auth/createUser";
-import setDocument from "../../../firebase/setDocument";
+
 import {
   isValidSignup,
   isValidEmail,
@@ -11,6 +11,7 @@ import {
 } from "../../../function/isValid";
 import { InputProps } from "../../Common/Input";
 import Loader from "../../Common/Loader";
+import error from "../../utils/error";
 
 interface SignupProps extends InputProps {
   isValid: boolean;
@@ -43,13 +44,11 @@ const useSignup = () => {
           email,
           nickname,
         };
-        await setDocument({ collection: "User", id: uid, payload });
+        // await setDocument({ collection: "User", id: uid, payload });
         router.push("/auth");
       }
     } catch ({ code, message }) {
-      if (code === "auth/email-already-in-use") {
-        console.error("이미 존재하는 계정입니다.");
-      } else console.error(message);
+      console.error(error[code]);
     }
     setIsLoading(false);
   };

@@ -19,4 +19,5 @@ const Setting = () => {
   );
 };
 
-export default withAuth(Setting);
+// export default withAuth(Setting);
+export default Setting;

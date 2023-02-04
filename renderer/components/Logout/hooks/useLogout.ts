@@ -6,7 +6,6 @@ const useLogout = () => {
   const [checked, setChecked] = useState(false);
 
   const onLogout = () => {
-    sessionStorage.removeItem("user");
     router.push("/auth");
   };
 
