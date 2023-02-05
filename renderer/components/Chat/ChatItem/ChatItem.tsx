@@ -1,14 +1,20 @@
 import dayjs from "dayjs";
+import { useRouter } from "next/router";
 import { ChatItemProps } from "../../../utils/interface";
 import useGetChatItem from "./useGetChatItem";
 
 const ChatItem = ({ chatItem }: ChatItemProps) => {
   const { lastMessage, lastTimeStamp, users } = chatItem;
+  const router = useRouter();
   const { user } = useGetChatItem(users);
+
+  const onClick = () => {
+    router.push(`/chat/${user?.uid}`);
+  };
 
   return (
     <>
-      <div className="chat_item">
+      <div className="chat_item" onClick={onClick}>
         <div className="thumbnail"></div>
         <div className="info">
           <span className="user">{user?.displayName}</span>
@@ -20,10 +26,14 @@ const ChatItem = ({ chatItem }: ChatItemProps) => {
       </div>
       <style jsx>{`
         .chat_item {
-          padding: 4px 20px;
+          padding: 10px 20px;
           display: flex;
           align-items: center;
           gap: 20px;
+        }
+        .chat_item:hover {
+          cursor: pointer;
+          background-color: #3d3d3d;
         }
         .thumbnail {
           width: 46px;
@@ -42,7 +52,7 @@ const ChatItem = ({ chatItem }: ChatItemProps) => {
         }
         .message {
           font-size: 0.875rem;
-          color: #777;
+          color: #666;
           width: 60px;
           text-overflow: ellipsis;
           white-space: nowrap;

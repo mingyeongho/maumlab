@@ -1,4 +1,5 @@
 import Room from "../../components/Chat/Room/Room";
+import withAuth from "../../components/Hoc/withAuth";
 import Navbar from "../../components/Navbar/Navbar";
 
 const ChatRoomPage = () => {
@@ -18,4 +19,4 @@ const ChatRoomPage = () => {
   );
 };
 
-export default ChatRoomPage;
+export default withAuth(ChatRoomPage);

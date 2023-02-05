@@ -41,7 +41,7 @@ export const addDocument = async ({ collectionName, fields }: addDocProps) => {
 };
 
 /**
- * 전체 문서를 덮어쓰지 않고 문서의 일부 필드를 업데이
+ * 전체 문서를 덮어쓰지 않고 문서의 일부 필드를 업데이트
  */
 export const updateDocument = async ({
   collectionName,
