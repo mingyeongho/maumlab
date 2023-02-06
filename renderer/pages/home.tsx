@@ -1,14 +1,9 @@
-import withAuth from "../components/Hoc/withAuth";
 import Home from "../components/Home/Home";
-import Navbar from "../components/Navbar/Navbar";
+import withAuth from "../Hoc/withAuth";
+import withNavs from "../Hoc/withNavs";
 
 const home = () => {
-  return (
-    <>
-      <Navbar />
-      <Home />
-    </>
-  );
+  return <Home />;
 };
 
-export default withAuth(home);
+export default withAuth(withNavs(home));

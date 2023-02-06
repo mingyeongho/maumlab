@@ -1,27 +1,15 @@
+import { Separate_X } from "../Common/Separate";
 import Friends from "./Friends/Friends";
-import MyProfile from "./MyProfile/MyProfile";
+import * as S from "./Home.style";
+import My from "./My/My";
 
 const Home = () => {
   return (
-    <>
-      <main>
-        <MyProfile />
-        <div className="separate"></div>
-        <Friends />
-      </main>
-      <style jsx>{`
-        main {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-        }
-
-        .separate {
-          height: 1px;
-          background-color: #555;
-        }
-      `}</style>
-    </>
+    <S.Home>
+      <My />
+      <Separate_X />
+      <Friends />
+    </S.Home>
   );
 };
 

@@ -1,32 +1,20 @@
 import Friend from "./Friend/Friend";
-import useGetFriends from "./useGetFriends";
+import useFriends from "./hooks/useFriends";
+import * as S from "./Friends.style";
 
 const Friends = () => {
-  const { friends } = useGetFriends();
+  const { data, isLoading } = useFriends();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <>
-      <div className="friends">
-        <span>친구 목록</span>
-        <div className="list">
-          {friends?.map((friend, idx) => (
-            <Friend key={idx} user={friend} />
-          ))}
-        </div>
-      </div>
-      <style jsx>{`
-        .friends {
-          padding: 10px;
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-        }
-        .list {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-        }
-      `}</style>
-    </>
+    <S.Friends>
+      {data.map((friend, idx) => (
+        <Friend user={friend} key={idx} />
+      ))}
+    </S.Friends>
   );
 };
 
