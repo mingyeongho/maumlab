@@ -1,25 +1,24 @@
-import { useQuery } from "@tanstack/react-query";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { firebaseAuth, firestore } from "../../../../firebase/firebase";
+import { onValue, ref } from "firebase/database";
+import { useEffect, useState } from "react";
+import { database, firebaseAuth } from "../../../../firebase/firebase";
+import { UserType } from "../../../../utils/types";
 
 const useFriends = () => {
-  const currentUser = firebaseAuth.currentUser;
-  const ref = query(
-    collection(firestore, "Users"),
-    where("uid", "!=", currentUser.uid)
-  );
+  const currentUid = firebaseAuth.currentUser.uid;
+  const [friends, setFriends] = useState<UserType[] | null>(null);
 
-  const { isLoading, data } = useQuery({
-    queryKey: ["friends"],
-    queryFn: () =>
-      getDocs(ref).then((res) => {
-        const list = [];
-        res.forEach((doc) => list.push(doc.data()));
-        return list;
-      }),
-  });
+  const friendsRef = ref(database, "Users");
 
-  return { isLoading, data };
+  useEffect(() => {
+    onValue(friendsRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        setFriends(Object.values(data));
+      }
+    });
+  }, []);
+
+  return { friends };
 };
 
 export default useFriends;

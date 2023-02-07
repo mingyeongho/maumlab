@@ -1,19 +1,18 @@
-import { getDatabase, onValue, ref } from "firebase/database";
+import { onValue, ref } from "firebase/database";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-import { firebaseAuth } from "../../../../firebase/firebase";
+import { database, firebaseAuth } from "../../../../firebase/firebase";
 import { MessageType } from "../../../../utils/types";
 import generatedId from "../../../function/generatedId";
 
 const useChatRecord = () => {
   const currentUid = firebaseAuth.currentUser.uid;
   const peerUid = useRouter().query.uid as string;
-  const db = getDatabase();
   const [messages, setMessages] = useState<MessageType[] | null>(null);
 
   const messagesRef = ref(
-    db,
+    database,
     `Messages_${generatedId({ currentUid, peerUid })}`
   );
 

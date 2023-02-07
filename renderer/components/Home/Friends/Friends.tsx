@@ -4,18 +4,15 @@ import * as S from "./Friends.style";
 import { UserType } from "../../../utils/types";
 
 const Friends = () => {
-  const { data, isLoading } = useFriends();
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  const { friends } = useFriends();
 
   return (
     <S.Friends>
       <S.Subject children="친구목록" />
-      {data.map((friend: UserType, idx) => (
-        <Friend user={friend} key={idx} />
-      ))}
+      {friends &&
+        friends.map((friend: UserType, idx) => (
+          <Friend user={friend} key={idx} />
+        ))}
     </S.Friends>
   );
 };
