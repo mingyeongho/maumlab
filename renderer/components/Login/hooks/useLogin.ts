@@ -1,11 +1,7 @@
-import { useAuthSignInWithEmailAndPassword } from "@react-query-firebase/auth";
-import { useMutation } from "@tanstack/react-query";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/router";
 import { ChangeEvent, FormEvent, useState } from "react";
-
-import { firebaseAuth, firestore } from "../../../firebase/firebase";
+import { firebaseAuth } from "../../../firebase/firebase";
 
 type LabelTypes = {
   children: string;
@@ -25,32 +21,28 @@ type ButtonTypes = {
 
 const useLogin = () => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
   });
   const { email, password } = inputs;
-  const { isLoading, mutate } = useMutation({
-    mutationKey: ["login"],
-    mutationFn: ({ email, password }: { email: string; password: string }) =>
-      signInWithEmailAndPassword(firebaseAuth, email, password).then((res) => {
-        alert(`Hello ${res.user.displayName}`);
-      }),
-    onSuccess: () => {
-      router.push("/home");
-    },
-  });
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    mutate({
-      email,
-      password,
+  const Login = async () => {
+    signInWithEmailAndPassword(firebaseAuth, email, password).then((res) => {
+      setIsLoading(false);
+      router.push("/home");
     });
+  };
+
+  const onSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    await Login();
   };
 
   const onSendSignup = () => {

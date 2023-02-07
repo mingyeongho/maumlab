@@ -1,9 +1,8 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { getDatabase, push, ref, set } from "firebase/database";
 import { useRouter } from "next/router";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { firebaseAuth, firestore } from "../../../firebase/firebase";
+import { database, firebaseAuth } from "../../../firebase/firebase";
 
 type LabelTypes = {
   children: string;
@@ -23,7 +22,7 @@ type ButtonTypes = {
 
 const useSignup = () => {
   const router = useRouter();
-  const queryClient = useQueryClient();
+  const [isLoading, setIsLoading] = useState(false);
   const [inputs, setInputs] = useState({
     nickname: "",
     email: "",
@@ -31,48 +30,37 @@ const useSignup = () => {
     confirmPassword: "",
   });
   const { nickname, email, password, confirmPassword } = inputs;
-  const { isLoading, mutate } = useMutation({
-    mutationKey: ["signup"],
-    mutationFn: ({
-      email,
-      password,
-      nickname,
-    }: {
-      email: string;
-      password: string;
-      nickname: string;
-    }) =>
-      createUserWithEmailAndPassword(firebaseAuth, email, password).then(
-        (res) => {
-          updateProfile(res.user, { displayName: nickname });
-          setDoc(doc(firestore, "Users", res.user.uid), {
-            nickname,
-            email,
-            uid: res.user.uid,
-          });
-        }
-      ),
-    onSuccess: () => {
-      alert(`Welcome ${nickname}`);
-      queryClient.invalidateQueries({ queryKey: ["friends"] });
-      router.push("/login");
-    },
-    onError: (e) => {
-      console.error(e);
-    },
-  });
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const onSubmit = (e: FormEvent) => {
+  const Signup = async () => {
+    await createUserWithEmailAndPassword(firebaseAuth, email, password)
+      .then((res) => {
+        updateProfile(res.user, { displayName: nickname });
+        const postListRef = ref(database, "Users");
+        const newPostRef = push(postListRef);
+        set(newPostRef, {
+          email,
+          nickname,
+          uid: res.user.uid,
+        });
+        router.push("/login");
+        alert(`Welcome ${nickname}`);
+      })
+      .catch(({ message }) => {
+        console.log(message);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    mutate({
-      email,
-      password,
-      nickname,
-    });
+    setIsLoading(true);
+    await Signup();
   };
 
   const onSendLogin = () => {
