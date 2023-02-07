@@ -21,7 +21,6 @@ const useChatRecord = () => {
     onValue(messagesRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
-        console.log(Object.values(data));
         setMessages(Object.values(data));
       }
     });

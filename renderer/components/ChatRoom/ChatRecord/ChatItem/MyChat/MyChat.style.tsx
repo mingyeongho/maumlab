@@ -4,7 +4,7 @@ import { Palette } from "../../../../../styles/Variable";
 export const MyChat = styled.div`
   display: flex;
   justify-content: flex-end;
-  align-items: center;
+  align-items: flex-end;
   gap: 10px;
 `;
 
@@ -21,4 +21,7 @@ export const Message = styled.span`
   border-radius: 10px 0 10px 10px;
 `;
 
-export const Timestamp = styled.span``;
+export const Timestamp = styled.span`
+  font-size: 0.8rem;
+  color: #777;
+`;
