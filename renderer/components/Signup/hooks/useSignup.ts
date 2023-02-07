@@ -1,8 +1,9 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { getDatabase, push, ref, set } from "firebase/database";
+import { doc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { database, firebaseAuth } from "../../../firebase/firebase";
+import { database, firebaseAuth, firestore } from "../../../firebase/firebase";
 
 type LabelTypes = {
   children: string;
@@ -39,6 +40,13 @@ const useSignup = () => {
     await createUserWithEmailAndPassword(firebaseAuth, email, password)
       .then((res) => {
         updateProfile(res.user, { displayName: nickname });
+
+        setDoc(doc(firestore, "Users", res.user.uid), {
+          email,
+          nickname,
+          uid: res.user.uid,
+        });
+
         const postListRef = ref(database, "Users");
         const newPostRef = push(postListRef);
         set(newPostRef, {
