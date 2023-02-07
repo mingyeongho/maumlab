@@ -1,15 +1,14 @@
 import * as S from "./ChatList.style";
+import ChatListItem from "./ChatListItem/ChatListItem";
 import useChatList from "./hooks/useChatList";
 
 const ChatList = () => {
-  const { data, isLoading } = useChatList();
+  const { list } = useChatList();
 
   return (
     <S.ChatList>
-      {isLoading ? (
-        <S.Loading children="Loading..." />
-      ) : data ? (
-        data.map((item, idx) => <span key={idx}>{idx}</span>)
+      {list && list.length > 0 ? (
+        list.map((room, idx) => <ChatListItem key={idx} chatListItem={room} />)
       ) : (
         <S.EmptyChatRoom children="채팅방이 존재하지 않습니다." />
       )}

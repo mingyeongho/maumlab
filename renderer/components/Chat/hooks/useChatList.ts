@@ -1,25 +1,28 @@
-import { useQuery } from "@tanstack/react-query";
-import { doc, getDoc } from "firebase/firestore";
-import { firebaseAuth, firestore } from "../../../firebase/firebase";
-import { ChatRoomType } from "../../../utils/types";
+import { onValue, ref } from "firebase/database";
+import { useEffect, useState } from "react";
+import { database, firebaseAuth } from "../../../firebase/firebase";
+import { ChatListItemType } from "../../../utils/types";
 
 const useChatList = () => {
-  const currentUser = firebaseAuth.currentUser;
+  const currentUid = firebaseAuth.currentUser.uid;
+  const [list, setList] = useState<ChatListItemType[]>();
 
-  const { data, isLoading } = useQuery<null | ChatRoomType[]>({
-    queryKey: ["chatlist"],
-    queryFn: () =>
-      getDoc(doc(firestore, "Chats", currentUser.uid)).then((res) => {
-        if (res.exists()) {
-          console.log(res.data());
-          return [] as ChatRoomType[];
-          // return res.data() as ChatRoomType[];
-        }
-        return null;
-      }),
-  });
+  const roomListRef = ref(database, `Chats/${currentUid}`);
 
-  return { data, isLoading };
+  useEffect(() => {
+    onValue(roomListRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const generateData = Object.entries(data).map((d) => ({
+          uid: d[0],
+          messageInfo: d[1],
+        }));
+        setList(generateData as ChatListItemType[]);
+      }
+    });
+  }, []);
+
+  return { list };
 };
 
 export default useChatList;

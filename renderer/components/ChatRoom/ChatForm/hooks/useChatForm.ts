@@ -1,8 +1,12 @@
-import { getDatabase, push, ref, set } from "firebase/database";
+import { child, getDatabase, push, ref, set, update } from "firebase/database";
 import { useRouter } from "next/router";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { firebaseAuth, firestore } from "../../../firebase/firebase";
-import generatedId from "../../function/generatedId";
+import {
+  database,
+  firebaseAuth,
+  firestore,
+} from "../../../../firebase/firebase";
+import generatedId from "../../../function/generatedId";
 
 const useChatForm = () => {
   const currentUser = firebaseAuth.currentUser;
@@ -18,9 +22,8 @@ const useChatForm = () => {
   };
 
   const writeChat = () => {
-    const db = getDatabase();
     const postListRef = ref(
-      db,
+      database,
       `Messages_${generatedId({ currentUid, peerUid })}`
     );
     const newPostRef = push(postListRef);
@@ -34,9 +37,27 @@ const useChatForm = () => {
     });
   };
 
+  const updateChats = () => {
+    const postData = {
+      message: input,
+      timestamp: Date.now(),
+      user: {
+        uid: currentUid,
+        nickname: currentNickname,
+      },
+    };
+
+    const updates = {};
+    updates[`/Chats/${currentUid}/${peerUid}`] = postData;
+    updates[`/Chats/${peerUid}/${currentUid}`] = postData;
+
+    return update(ref(database), updates);
+  };
+
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     writeChat();
+    updateChats();
     setInput("");
   };
 

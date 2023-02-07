@@ -1,7 +1,6 @@
 import { onValue, ref } from "firebase/database";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-
 import { database, firebaseAuth } from "../../../../firebase/firebase";
 import { MessageType } from "../../../../utils/types";
 import generatedId from "../../../function/generatedId";

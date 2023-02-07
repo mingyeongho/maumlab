@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ChatList = styled.main`
-  padding: 20px;
+  padding: 16px;
 `;
 
 export const Loading = styled.span``;

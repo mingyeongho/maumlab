@@ -1,5 +1,5 @@
 import * as S from "./ChatForm.style";
-import useChatForm from "./useChatForm";
+import useChatForm from "./hooks/useChatForm";
 
 const ChatForm = () => {
   const { inputProps, onSubmit } = useChatForm();

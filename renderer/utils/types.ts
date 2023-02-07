@@ -4,7 +4,14 @@ export type UserType = {
   nickname: string;
 };
 
-export type ChatRoomType = {};
+export type ChatListType = {
+  list: ChatListItemType[];
+};
+
+export type ChatListItemType = {
+  uid: string;
+  messageInfo: MessageType;
+};
 
 export type MessageType = {
   message: string;
