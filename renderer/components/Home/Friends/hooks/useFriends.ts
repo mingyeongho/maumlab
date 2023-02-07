@@ -13,7 +13,10 @@ const useFriends = () => {
     onValue(friendsRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
-        setFriends(Object.values(data));
+        const friends = Object.values(data).filter(
+          (friend: UserType) => friend.uid !== currentUid
+        );
+        setFriends(friends as UserType[]);
       }
     });
   }, []);
