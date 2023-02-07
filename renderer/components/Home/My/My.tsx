@@ -7,8 +7,11 @@ const My = () => {
 
   return (
     <S.My>
-      <S.Thumbnail />
-      <S.Profile>{displayName}</S.Profile>
+      <S.Subject children="내 프로필" />
+      <S.ProfileContainer>
+        <S.Thumbnail />
+        <S.Profile>{displayName}</S.Profile>
+      </S.ProfileContainer>
     </S.My>
   );
 };

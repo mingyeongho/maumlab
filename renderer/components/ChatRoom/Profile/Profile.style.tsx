@@ -1,16 +1,11 @@
 import styled from "styled-components";
-import { Palette } from "../../../../styles/Variable";
+import { Palette } from "../../../styles/Variable";
 
-export const Friend = styled.div`
+export const Profile = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 6px 10px;
-
-  &:hover {
-    background-color: #555;
-    cursor: pointer;
-  }
+  padding: 10px;
 `;
 
 export const Thumbnail = styled.div`
@@ -20,6 +15,6 @@ export const Thumbnail = styled.div`
   border-radius: 16px;
 `;
 
-export const Profile = styled.div`
+export const Nickname = styled.div`
   font-size: 1.1rem;
 `;

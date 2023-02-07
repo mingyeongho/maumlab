@@ -3,3 +3,5 @@ export type UserType = {
   email: string;
   nickname: string;
 };
+
+export type ChatRoomType = {};

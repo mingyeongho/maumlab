@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { firebaseAuth, firestore } from "../../../firebase/firebase";
@@ -45,7 +45,7 @@ const useSignup = () => {
       createUserWithEmailAndPassword(firebaseAuth, email, password).then(
         (res) => {
           updateProfile(res.user, { displayName: nickname });
-          addDoc(collection(firestore, "Users"), {
+          setDoc(doc(firestore, "Users", res.user.uid), {
             nickname,
             email,
             uid: res.user.uid,
