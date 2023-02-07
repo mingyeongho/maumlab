@@ -2,21 +2,23 @@ import { useQuery } from "@tanstack/react-query";
 import { doc, getDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { firestore } from "../../../../firebase/firebase";
-import { UserType } from "../../../../utils/types";
 
 const useProfile = () => {
   const router = useRouter();
   const uid = router.query.uid as string;
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["getChatRoomUser"],
     queryFn: () =>
       getDoc(doc(firestore, "Users", uid)).then((res) => {
-        return res.data();
+        if (res.exists()) {
+          return res.data();
+        }
+        return null;
       }),
   });
 
-  return { data };
+  return { isLoading, data };
 };
 
 export default useProfile;

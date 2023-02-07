@@ -3,9 +3,11 @@ import useProfile from "./hooks/useProfile";
 import * as S from "./Profile.style";
 
 const Profile = () => {
-  const { data } = useProfile();
-  const { uid, email, nickname } = data as UserType;
-  console.log(data);
+  const { data, isLoading } = useProfile();
+
+  if (isLoading) return <div>Loading...</div>;
+
+  const { nickname } = data as UserType;
 
   return (
     <S.Profile>

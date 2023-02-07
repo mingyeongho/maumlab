@@ -5,3 +5,12 @@ export type UserType = {
 };
 
 export type ChatRoomType = {};
+
+export type MessageType = {
+  message: string;
+  timestamp: number;
+  user: {
+    nickname: string;
+    uid: string;
+  };
+};
