@@ -54,6 +54,11 @@ export const Button = styled.button`
   &:hover {
     cursor: pointer;
   }
+
+  &:disabled {
+    background-color: #555;
+    cursor: no-drop;
+  }
 `;
 
 export const SendLogin = styled.span`
@@ -63,3 +68,5 @@ export const SendLogin = styled.span`
     color: ${Palette.accent};
   }
 `;
+
+export const Error = styled.span``;

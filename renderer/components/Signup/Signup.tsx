@@ -3,6 +3,7 @@ import * as S from "./Signup.style";
 
 const Signup = () => {
   const {
+    error,
     nicknameLabelProps,
     nicknameProps,
     emailLabelProps,
@@ -38,6 +39,7 @@ const Signup = () => {
         <S.Button {...buttonProps} />
       </S.SignupForm>
       <S.SendLogin children={"로그인 하러가기"} onClick={onSendLogin} />
+      <S.Error children={error} />
     </S.Signup>
   );
 };

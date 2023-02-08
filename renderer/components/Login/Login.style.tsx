@@ -63,3 +63,5 @@ export const SendSignup = styled.span`
     color: ${Palette.accent};
   }
 `;
+
+export const Error = styled.span``;

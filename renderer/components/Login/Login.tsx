@@ -3,6 +3,7 @@ import * as S from "./Login.style";
 
 const Login = () => {
   const {
+    error,
     emailLabelProps,
     emailProps,
     passwordLabelProps,
@@ -26,6 +27,7 @@ const Login = () => {
         <S.Button {...buttonProps} />
       </S.LoginForm>
       <S.SendSignup children={"회원가입 하러가기"} onClick={onSendSignup} />
+      <S.Error children={error} />
     </S.Login>
   );
 };

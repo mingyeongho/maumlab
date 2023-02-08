@@ -1,9 +1,11 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { getDatabase, push, ref, set } from "firebase/database";
+import { push, ref, set } from "firebase/database";
 import { doc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { database, firebaseAuth, firestore } from "../../../firebase/firebase";
+import Error from "../../../utils/error";
+import isValid from "../../function/isValid";
 
 type LabelTypes = {
   children: string;
@@ -19,6 +21,7 @@ type InputTypes = {
 
 type ButtonTypes = {
   children: string;
+  disabled: boolean;
 };
 
 const useSignup = () => {
@@ -31,6 +34,7 @@ const useSignup = () => {
     confirmPassword: "",
   });
   const { nickname, email, password, confirmPassword } = inputs;
+  const [error, setError] = useState("");
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -57,8 +61,8 @@ const useSignup = () => {
         router.push("/login");
         alert(`Welcome ${nickname}`);
       })
-      .catch(({ message }) => {
-        console.log(message);
+      .catch(({ code }) => {
+        setError(Error[code]);
       })
       .finally(() => {
         setIsLoading(false);
@@ -125,9 +129,11 @@ const useSignup = () => {
 
   const buttonProps: ButtonTypes = {
     children: isLoading ? "Loading" : "회원가입",
+    disabled: !isValid({ nickname, email, password, confirmPassword }),
   };
 
   return {
+    error,
     nicknameLabelProps,
     nicknameProps,
     emailLabelProps,

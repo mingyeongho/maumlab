@@ -2,6 +2,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/router";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { firebaseAuth } from "../../../firebase/firebase";
+import Error from "../../../utils/error";
 
 type LabelTypes = {
   children: string;
@@ -27,16 +28,21 @@ const useLogin = () => {
     password: "",
   });
   const { email, password } = inputs;
+  const [error, setError] = useState("");
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const Login = async () => {
-    signInWithEmailAndPassword(firebaseAuth, email, password).then((res) => {
-      setIsLoading(false);
-      router.push("/home");
-    });
+    signInWithEmailAndPassword(firebaseAuth, email, password)
+      .then((res) => {
+        setIsLoading(false);
+        router.push("/home");
+      })
+      .catch(({ code }) => {
+        setError(Error[code]);
+      });
   };
 
   const onSubmit = async (e: FormEvent) => {
@@ -78,6 +84,7 @@ const useLogin = () => {
   };
 
   return {
+    error,
     emailLabelProps,
     emailProps,
     passwordLabelProps,
