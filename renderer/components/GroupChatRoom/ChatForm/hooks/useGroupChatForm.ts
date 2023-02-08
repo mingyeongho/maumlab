@@ -1,16 +1,17 @@
-import { push, ref, set, update } from "firebase/database";
+import { ref, push, set, update } from "firebase/database";
 import { useRouter } from "next/router";
-import { ChangeEvent, FormEvent, useState } from "react";
-import { database, firebaseAuth } from "../../../../firebase/firebase";
-import generatedId from "../../../function/generatedId";
+import { useState, ChangeEvent, FormEvent } from "react";
+import { firebaseAuth, database } from "../../../../firebase/firebase";
+import generatedGroupId from "../../../function/generatedGroupId";
 
-const useChatForm = () => {
+const useGroupChatForm = () => {
   const currentUser = firebaseAuth.currentUser;
-  const peerUid = useRouter().query.uid as string;
+  const peerUids = useRouter().query.roomId as string;
   const [currentUid, currentNickname] = [
     currentUser.uid,
     currentUser.displayName,
   ];
+  const uids = peerUids.split(",").concat(currentUid);
   const [input, setInput] = useState("");
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +21,7 @@ const useChatForm = () => {
   const writeChat = () => {
     const postListRef = ref(
       database,
-      `Messages_${generatedId({ currentUid, peerUid })}`
+      `GroupMessages_${generatedGroupId({ uids })}`
     );
     const newPostRef = push(postListRef);
     set(newPostRef, {
@@ -44,8 +45,9 @@ const useChatForm = () => {
     };
 
     const updates = {};
-    updates[`/Chats/${currentUid}/${peerUid}`] = postData;
-    updates[`/Chats/${peerUid}/${currentUid}`] = postData;
+    uids.forEach((uid) => {
+      updates[`/GroupChats/${uid}/${generatedGroupId({ uids })}`] = postData;
+    });
 
     return update(ref(database), updates);
   };
@@ -65,4 +67,4 @@ const useChatForm = () => {
   return { inputProps, onSubmit };
 };
 
-export default useChatForm;
+export default useGroupChatForm;

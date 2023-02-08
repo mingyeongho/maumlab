@@ -1,4 +1,3 @@
-import { createGlobalStyle } from "styled-components";
 import { firebaseAuth } from "../../../firebase/firebase";
 import MyChat from "./ChatItem/MyChat/MyChat";
 import PeerChat from "./ChatItem/PeerChat/PeerChat";
