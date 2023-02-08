@@ -37,11 +37,13 @@ const useLogin = () => {
   const Login = async () => {
     signInWithEmailAndPassword(firebaseAuth, email, password)
       .then((res) => {
-        setIsLoading(false);
         router.push("/home");
       })
       .catch(({ code }) => {
         setError(Error[code]);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
