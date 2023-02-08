@@ -45,6 +45,14 @@
 
 <h2 id='run'>환경설정 및 실행</h2>
 
+<pre>
+git clone https://github.com/mingyeongho/maumlab.git
+
+yarn // install packages
+
+yarn run dev // run
+</pre>
+
 <h2 id='features'>요구사항</h2>
 
 - [x] 회원가입
