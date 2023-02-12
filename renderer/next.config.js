@@ -9,7 +9,14 @@ module.exports = {
     NEXT_PUBLIC_DATABASEURL:
       "https://maumlab-347c4-default-rtdb.asia-southeast1.firebasedatabase.app",
   },
+
   webpack: (config, { isServer }) => {
+    config.module.rules.push({
+      test: /\.svg$/i,
+      issuer: /\.[jt]sx?$/,
+      use: ["@svgr/webpack"],
+    });
+
     if (!isServer) {
       config.target = "electron-renderer";
     }
