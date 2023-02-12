@@ -14,11 +14,7 @@ module.exports = {
       config.target = "electron-renderer";
     }
 
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ["@svgr/webpack"],
-    });
-
     return config;
   },
+  styledComponent: true,
 };
