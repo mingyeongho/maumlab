@@ -71,7 +71,7 @@ yarn run dev // run
 
 <h2 id='library'>라이브러리</h2>
 
-![image](https://user-images.githubusercontent.com/57670160/217441770-61c52e62-f0a8-4495-af67-30024f658e57.png)
+<img width="400" alt="image" src="https://user-images.githubusercontent.com/57670160/218308797-82170bbe-7ad1-458c-b8c0-1bec136dbcfa.png">
 
 <h2 id='structure'>폴더 구조</h2>
 
@@ -235,6 +235,8 @@ renderer
 - 로그인 Persistence
 
 - Realtime Database
+
+- svgr을 사용하는 부분에서 vite plugin을 사용하고 싶었는데 vite와 nextjs를 동시에 사용하는 상황에서 svgr을 사용하는 방법을 아직 찾지 못하였다.
 
 <h2 id='improve'>개선사항</h2>
 
